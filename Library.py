@@ -76,26 +76,16 @@ class Admin:
 
     def show_menu(self):
         print("\n" + "=" * 40)
-        print("   📚 LIBRARY MANAGEMENT SYSTEM")
+        print("   LIBRARY MANAGEMENT SYSTEM")
         print("=" * 40)
-        print(" 1. 📖 Add Book")
-        print(" 2. 📋 Show All Books")
-        print(" 3. 🔍 Search Books by Prefix")
-        print(" 4. 👤 Add User")
-        print(" 5. ➡️  Borrow Book")
-        print(" 6. ⬅️  Return Book")
-        print(" 7. 👥 Show Users")
-        print(" 8. 🚪 Exit")
-        print("   ~~ LIBRARY MANAGEMENT SYSTEM ~~")
-        print("=" * 40)
-        print(" 1. [B] Add Book")
-        print(" 2. [L] Show All Books")
-        print(" 3. [S] Search Books by Prefix")
-        print(" 4. [U] Add User")
-        print(" 5. [->] Borrow Book")
-        print(" 6. [<-] Return Book")
-        print(" 7. [P] Show Users")
-        print(" 8. [X] Exit")
+        print(" 1. Add Book")
+        print(" 2. Show All Books")
+        print(" 3. Search Books")
+        print(" 4. Add User")
+        print(" 5. Borrow Book")
+        print(" 6. Return Book")
+        print(" 7. Show Users")
+        print(" 8. Exit")
 
     def get_choice(self):
         while True:
@@ -124,7 +114,7 @@ class Admin:
                 break
             print("Must be a positive number.")
         self.books.append(Book(book_id, name, qty))
-        print(f"Added '{name}'! ✅")
+        print(f"Added '{name}'!")
 
     def add_user(self):
         print("\n=== Add User ===")
@@ -138,7 +128,7 @@ class Admin:
                 break
             print("Name cannot be empty.")
         self.users.append(User(user_id, name))
-        print(f"Added '{name}'! ✅")
+        print(f"Added '{name}'!")
 
     def show_books(self):
         print("\n=== Library Books ===")
@@ -146,7 +136,7 @@ class Admin:
             print("No books yet.")
             return
         for book in sorted(self.books, key=lambda b: b.name.lower()):
-            print(f"  {'📗' if book.is_available() else '📕'} {book}")
+            print(f"  {book}")
 
     def search_books(self):
         prefix = input("Enter prefix: ").strip().lower()
@@ -156,8 +146,7 @@ class Admin:
             print("No matching books.")
             return
         for book in sorted(found, key=lambda b: b.name.lower()):
-            print(f"  {'📗' if book.is_available() else '📕'} {book}")
-            print()
+            print(f"  {book}\n")
 
     def borrow_book(self):
         print("\n=== Borrow Book ===")
@@ -176,9 +165,9 @@ class Admin:
             print("Book not found.")
             return
         if user.borrow_book(book):
-            print(f"{user.name} borrowed '{book.name}'! ✅")
+            print(f"{user.name} borrowed '{book.name}'!")
         else:
-            print("Can't borrow. (Limit reached, already borrowed, or no copies left)")
+            print("Can't borrow. (Limit reached, already borrowed, or no copies)")
 
     def return_book(self):
         print("\n=== Return Book ===")
@@ -197,7 +186,7 @@ class Admin:
             print("Book not found.")
             return
         if user.return_book(book):
-            print(f"{user.name} returned '{book.name}'! ✅")
+            print(f"{user.name} returned '{book.name}'!")
         else:
             print("This user doesn't have that book.")
 
@@ -229,7 +218,7 @@ class Admin:
             elif choice == 7:
                 self.show_users()
             elif choice == 8:
-                print("\nThanks for visiting the library! 📚👋")
+                print("\nThanks for visiting the library!")
                 break
 
 
